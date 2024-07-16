@@ -7,6 +7,8 @@ import cookieParser from "cookie-parser";
 import postRoutes from "./Api/Routes/postRoutes.js";
 const app = express();
 const port = 3000;
+app.use(express.json());
+app.use(cookieParser());
 
 // Middleware Connections
 app.use(
@@ -22,8 +24,7 @@ app.get("/", async (req, res) => {
   res.send("Hello World!");
 });
 
-app.use(express.json());
-app.use(cookieParser());
+
 
 // Routes
 app.use("/api/auth", authRoutes);
