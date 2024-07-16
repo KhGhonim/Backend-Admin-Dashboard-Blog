@@ -11,7 +11,7 @@ const port = 3000;
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://admin-dashboard-blog.onrender.com",
+    origin: "http://localhost:5173",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
