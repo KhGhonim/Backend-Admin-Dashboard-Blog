@@ -64,11 +64,13 @@ export const loginUser = async (req, res) => {
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1h",
+        expiresIn: "6h",
       }
     );
     res.cookie("token", token, {
       httpOnly: true,
+      secure: true, // Ensure secure flag is set for HTTPS
+      sameSite: 'none' // Ensure sameSite is set correctly for cross-site requests
     });
 
     res.status(200).send({ user });
