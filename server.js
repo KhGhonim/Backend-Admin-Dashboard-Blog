@@ -8,6 +8,7 @@ import postRoutes from "./Api/Routes/postRoutes.js";
 const app = express();
 const port = 3000;
 
+
 // Middleware Connections
 app.use(
   cors({
