@@ -11,10 +11,10 @@ const port = 3000;
 // Middleware Connections
 app.use(
   cors({
-    origin:
-      "https://admin-dashboard-blog.vercel.app",
+    origin: "https://admin-dashboard-blog.vercel.app", // Frontend domain
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // Allow credentials (cookies)
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
   })
 );
 
