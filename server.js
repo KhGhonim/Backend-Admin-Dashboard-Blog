@@ -11,9 +11,11 @@ const port = 3000;
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://admin-dashboard-blog.vercel.app",
+    origin: "https://admin-dashboard-blog.onrender.com",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    
   })
 );
 
