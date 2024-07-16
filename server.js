@@ -14,9 +14,8 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "https://admin-dashboard-blog.vercel.app", // Frontend domain
-    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // Allow credentials (cookies)
-    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+  
   })
 );
 
