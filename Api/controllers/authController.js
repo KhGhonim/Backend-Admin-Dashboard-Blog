@@ -93,6 +93,8 @@ export const Google = async (req, res, next) => {
       );
       res.cookie("token", token, {
         httpOnly: true,
+        secure: true, // Ensure secure flag is set for HTTPS
+        sameSite: 'none' // Ensure sameSite is set correctly for cross-site requests
       });
       res.status(200).send({ user });
     } else {
