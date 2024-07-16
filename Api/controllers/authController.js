@@ -69,8 +69,10 @@ export const loginUser = async (req, res) => {
     );
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true, // Ensure secure flag is set for HTTPS
-      sameSite: 'none' // Ensure sameSite is set correctly for cross-site requests
+      secure: process.env.NODE_ENV === "production", // Secure only in production
+      sameSite: 'none', // Ensure sameSite is set correctly for cross-site requests
+      path: '/',
+      domain: process.env.COOKIE_DOMAIN || 'https://admin-dashboard-blog.vercel.app' // Set your domain accordingly
     });
 
     res.status(200).send({ user });
