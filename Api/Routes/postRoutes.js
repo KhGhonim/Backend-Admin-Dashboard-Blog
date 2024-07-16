@@ -11,7 +11,7 @@ import JWTverifier from "../Helpers/JWTverifier.js";
 const router = express.Router();
 
 router.post("/create", JWTverifier, createPost);
-router.get("/allposts", JWTverifier, AllPosts);
+router.get("/allposts", AllPosts);
 router.delete("/deletepost/:id", JWTverifier, deletePost);
 router.get("/getPost/:id", JWTverifier, getPost);
 router.put("/updatepost/:id", JWTverifier, updateUserPost);
