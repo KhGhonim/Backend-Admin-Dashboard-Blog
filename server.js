@@ -11,8 +11,10 @@ const port = 3000;
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://admin-dashboard-blog.vercel.app",
+    origin:
+      "http://localhost:5173" || "https://admin-dashboard-blog.vercel.app",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 

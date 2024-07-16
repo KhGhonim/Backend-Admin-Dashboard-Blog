@@ -3,6 +3,7 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 export default function JWTverifier(req, res, next) {
   const authorization = req.cookies.token;
+  console.log(authorization);
   if (!authorization) {
     return res.status(401).json({
       message: "No Authorization Header",
