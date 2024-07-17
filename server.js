@@ -15,15 +15,12 @@ app.use(
   cors({
     origin: "https://admin-dashboard-blog.vercel.app", // Frontend domain
     credentials: true, // Allow credentials (cookies)
-  
   })
 );
 
 app.get("/", async (req, res) => {
   res.send("Hello World!");
 });
-
-
 
 // Routes
 app.use("/api/auth", authRoutes);

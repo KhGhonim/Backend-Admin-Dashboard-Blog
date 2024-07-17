@@ -12,6 +12,12 @@ export default function JWTverifier(req, res, next) {
     });
   }
 
+  if (!req.headers.cookie) {
+    return res.status(401).json({
+      message: "No Cookies Found",
+    });
+  }
+
   jwt.verify(authorization, SECRET_KEY, (err, user) => {
     if (err) {
       return res.status(500).json({
