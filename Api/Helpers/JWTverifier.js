@@ -5,6 +5,11 @@ export default function JWTverifier(req, res, next) {
   const token = req.cookies.token; // Read the token from cookies
   console.log(token);
 
+  // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+  const cookie = req.cookies.cookie
+  console.log(cookie);
+  // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   if (!token) {
     return res.status(401).json({
       message: "No token Header",
