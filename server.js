@@ -13,7 +13,7 @@ app.use(cookieParser());
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://admin-dashboard-blog.vercel.app", // Frontend domain
+    origin: "http://localhost:5173", // Frontend domain
     credentials: true, // Allow credentials (cookies)
   })
 );
