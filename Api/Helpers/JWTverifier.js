@@ -2,23 +2,18 @@ import jwt from "jsonwebtoken";
 const SECRET_KEY = process.env.JWT_SECRET;
 
 export default function JWTverifier(req, res, next) {
-  const authorization = req.headers.token;
-  console.log(authorization);
-  console.log(req.headers.cookie);
+  const token = req.cookies.token;  // Read the token from cookies
+  console.log(token);
 
-  if (!authorization) {
+  if (!token) {
     return res.status(401).json({
-      message: "No Authorization Header",
+      message: "No token Header",
     });
   }
 
-  if (!req.headers.cookie) {
-    return res.status(401).json({
-      message: "No Cookies Found",
-    });
-  }
 
-  jwt.verify(authorization, SECRET_KEY, (err, user) => {
+
+  jwt.verify(token, SECRET_KEY, (err, user) => {
     if (err) {
       return res.status(500).json({
         message: "Invalid Token",
