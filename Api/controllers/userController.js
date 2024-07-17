@@ -52,7 +52,6 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
-
 export const deleteUser = async (req, res, next) => {
   if (!req.user.isAdmin || req.user.id !== req.params.userId) {
     return next(res.status(403).json("You can delete only your account!"));
@@ -76,13 +75,16 @@ export const deleteUser = async (req, res, next) => {
 
 export const getAllUsers = async (req, res, next) => {
   if (!req.user.isAdmin) {
-    res.status(403).json("You are not allowed to see all users");
+    return res.status(403).json("You are not allowed to see all users");
   }
   try {
     const Allusers = await UserModel.find();
+    if (!Allusers) {
+      return res.status(403).send({ message: "No users found" });
+    }
     res.status(200).send(Allusers);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 };
 
@@ -113,7 +115,7 @@ export const ChangeAdminStatus = async (req, res, next) => {
   }
 
   try {
-     await UserModel.findByIdAndUpdate(req.params.userId, {
+    await UserModel.findByIdAndUpdate(req.params.userId, {
       $set: {
         isAdmin: req.body.isAdmin,
       },

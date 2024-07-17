@@ -39,13 +39,14 @@ export const createPost = async (req, res, next) => {
 export const AllPosts = async (req, res, next) => {
   try {
     const Posts = await PostModel.find();
-    if (Posts) {
-      res.status(200).send(Posts);
-    } else {
-      res.status(404).send("Posts not found");
+    if (!Posts) {
+      return res.status(404).send({
+        message: "No posts found",
+      });
     }
+    res.status(200).send(Posts);
   } catch (error) {
-    res.status(500).send(error.message);
+    return res.status(500).send(error.message);
   }
 };
 
