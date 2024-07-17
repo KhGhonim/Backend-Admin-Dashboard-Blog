@@ -3,7 +3,7 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 export default function JWTverifier(req, res, next) {
   const token = req.cookies.jwt; // Read the token from cookies
-
+console.log(token);
   if (!token) {
     return res.status(401).json({
       message: "No token Header",
