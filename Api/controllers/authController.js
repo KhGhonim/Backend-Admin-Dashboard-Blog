@@ -70,7 +70,6 @@ export const loginUser = async (req, res) => {
         httpOnly: true,
       });
       res.status(200).send({ user });
-      console.log(user);
     }
   } catch (error) {
     res.status(500).send(error.message);
@@ -134,7 +133,7 @@ export const Google = async (req, res, next) => {
 
 export const signout = (req, res, next) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("jwt");
     res.status(200).send("User has been signed out");
   } catch (error) {
     res.status(500).send(error.message);
