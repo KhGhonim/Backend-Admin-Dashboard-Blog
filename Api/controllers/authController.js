@@ -68,9 +68,9 @@ export const loginUser = async (req, res) => {
       );
       res.cookie("jwt", token, {
         httpOnly: true,
-        maxAge: 86400000
       });
-      res.redirect("/");
+      res.status(200).send({ user });
+      console.log(user);
     }
   } catch (error) {
     res.status(500).send(error.message);
