@@ -60,22 +60,20 @@ export const loginUser = async (req, res) => {
       return res.status(400).send({ message: "Invalid password" });
     }
 
-    const token = jwt.sign(
-      { id: user._id, isAdmin: user.isAdmin },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "6h",
-      }
-    );
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Secure only in production
-      sameSite: 'none', // Ensure sameSite is set correctly for cross-site requests
-      path: '/',
-      domain: process.env.COOKIE_DOMAIN || 'https://admin-dashboard-blog.vercel.app' // Set your domain accordingly
-    });
-
-    res.status(200).send({ user });
+    // Generate JWT
+    if (user && isMatch) {
+      const token = jwt.sign(
+        { id: user._id, isAdmin: user.isAdmin },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "6h",
+        }
+      );
+      res.cookie("token", token, {
+        httpOnly: true,
+      });
+      res.status(200).send({ user });
+    }
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -98,7 +96,7 @@ export const Google = async (req, res, next) => {
       res.cookie("token", token, {
         httpOnly: true,
         secure: true, // Ensure secure flag is set for HTTPS
-        sameSite: 'none' // Ensure sameSite is set correctly for cross-site requests
+        sameSite: "none", // Ensure sameSite is set correctly for cross-site requests
       });
       res.status(200).send({ user });
     } else {
