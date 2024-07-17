@@ -64,15 +64,13 @@ export const loginUser = async (req, res) => {
     if (user && isMatch) {
       const token = jwt.sign(
         { id: user._id, isAdmin: user.isAdmin },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "6h",
-        }
+        process.env.JWT_SECRET
       );
-      res.cookie("token", token, {
+      res.cookie("jwt", token, {
         httpOnly: true,
+        maxAge: 86400000
       });
-      res.status(200).send({ user });
+      res.redirect("/");
     }
   } catch (error) {
     res.status(500).send(error.message);

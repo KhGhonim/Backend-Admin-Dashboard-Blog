@@ -2,14 +2,8 @@ import jwt from "jsonwebtoken";
 const SECRET_KEY = process.env.JWT_SECRET;
 
 export default function JWTverifier(req, res, next) {
-  const token = req.cookies.token; // Read the token from cookies
-  console.log(token);
+  const token = req.cookies.jwt; // Read the token from cookies
 
-  // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-  const cookie = req.cookies.cookie
-  console.log(cookie);
-  // \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   if (!token) {
     return res.status(401).json({
       message: "No token Header",
