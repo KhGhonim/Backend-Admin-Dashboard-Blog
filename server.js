@@ -8,7 +8,6 @@ import postRoutes from "./Api/Routes/postRoutes.js";
 import dashboardRoutes from "./Api/Routes/dashboardRoutes.js";
 const app = express();
 const port = 3000;
-app.use(express.json());
 app.use(cookieParser());
 
 // Middleware Connections
@@ -18,6 +17,7 @@ app.use(
     credentials: true, // Allow credentials (cookies)
   })
 );
+app.use(express.json());
 
 app.get("/", async (req, res) => {
   res.send("Hello World!");
