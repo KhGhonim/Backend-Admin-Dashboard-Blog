@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import MongoDB from "./Config/MongoDB.js";
 import authRoutes from "./Api/Routes/authRoutes.js";
 import userRoutes from "./Api/Routes/userRoutes.js";
-import MongoDB from "./Config/MongoDB.js";
-import cookieParser from "cookie-parser";
 import postRoutes from "./Api/Routes/postRoutes.js";
+import dashboardRoutes from "./Api/Routes/dashboardRoutes.js";
 const app = express();
 const port = 3000;
 app.use(express.json());
@@ -13,7 +14,7 @@ app.use(cookieParser());
 // Middleware Connections
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend domain
+    origin: "https://admin-dashboard-blog.vercel.app", // Frontend domain
     credentials: true, // Allow credentials (cookies)
   })
 );
@@ -25,6 +26,7 @@ app.get("/", async (req, res) => {
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", dashboardRoutes);
 app.use("/api/post", postRoutes);
 
 // Connection

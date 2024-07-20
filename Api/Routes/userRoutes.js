@@ -16,4 +16,5 @@ router.delete("/Admin/deleteuser/:userId", JWTverifier, deleteUserbyAdmin);
 router.get("/AllUsers", JWTverifier, getAllUsers);
 router.put("/Admin/:userId", JWTverifier, ChangeAdminStatus);
 
+
 export default router;

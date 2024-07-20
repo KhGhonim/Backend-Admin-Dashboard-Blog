@@ -1,3 +1,4 @@
+import CommentModel from "../Models/Comments.js";
 import UserModel from "../Models/User.js";
 import bcrypt from "bcrypt";
 
@@ -126,3 +127,4 @@ export const ChangeAdminStatus = async (req, res, next) => {
     res.status(500).json({ message: "Error changing admin status" });
   }
 };
+

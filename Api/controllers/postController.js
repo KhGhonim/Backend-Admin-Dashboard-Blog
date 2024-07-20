@@ -1,4 +1,3 @@
-import Post from "../Models/Post.js";
 import PostModel from "../Models/Post.js";
 
 export const createPost = async (req, res, next) => {
@@ -120,3 +119,5 @@ export const updateUserPost = async (req, res, next) => {
     res.status(500).send(error.message);
   }
 };
+
+
