@@ -68,7 +68,8 @@ export const loginUser = async (req, res) => {
       );
       res.cookie("jwt", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production'
+        secure: true, // Ensure secure flag is set for HTTPS
+        sameSite: "none", // Ensure sameSite is set correctly for cross-site requests
       });
       res.status(200).send({ user });
     }
