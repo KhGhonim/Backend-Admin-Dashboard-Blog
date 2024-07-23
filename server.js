@@ -6,6 +6,7 @@ import authRoutes from "./Api/Routes/authRoutes.js";
 import userRoutes from "./Api/Routes/userRoutes.js";
 import postRoutes from "./Api/Routes/postRoutes.js";
 import dashboardRoutes from "./Api/Routes/dashboardRoutes.js";
+import searchRoutes from "./Api/Routes/searchRoutes.js";
 const app = express();
 const port = 3000;
 app.use(cookieParser());
@@ -28,6 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api/post", postRoutes);
+app.use("/api", searchRoutes);
 
 // Connection
 const startServer = async () => {
