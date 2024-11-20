@@ -7,6 +7,9 @@ import userRoutes from "./Api/Routes/userRoutes.js";
 import postRoutes from "./Api/Routes/postRoutes.js";
 import dashboardRoutes from "./Api/Routes/dashboardRoutes.js";
 import searchRoutes from "./Api/Routes/searchRoutes.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 const app = express();
 const port = 3000;
 app.use(cookieParser());
@@ -14,7 +17,7 @@ app.use(cookieParser());
 // Middleware Connections
 app.use(
   cors({
-    origin: "https://admin-dashboard-blog.vercel.app", // Frontend domain
+    origin: process.env.FRONTEND_DB_URL, // Frontend domain
     credentials: true, // Allow credentials (cookies)
   })
 );
