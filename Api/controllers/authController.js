@@ -64,13 +64,25 @@ export const loginUser = async (req, res) => {
     if (user && isMatch) {
       const token = jwt.sign(
         { id: user._id, isAdmin: user.isAdmin },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET, { expiresIn: "1h" }
       );
+      const refreshToken = jwt.sign(
+        { id: user._id },
+        process.env.REFRESH_SECRET,
+        { expiresIn: "7d" } // Long-lived token
+      );
+
       res.cookie("jwt", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV !== "development",
         sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
-        maxAge: 3600000,
+        maxAge: 3600000, // 1 hour
+      });
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        maxAge: 7 * 24 * 3600000, // 7 days
       });
       res.status(200).send({ user });
     }
@@ -92,11 +104,26 @@ export const Google = async (req, res, next) => {
         {
           expiresIn: "1h",
         }
+        
       );
-      res.cookie("token", token, {
+
+      const refreshToken = jwt.sign(
+        { id: user._id },
+        process.env.REFRESH_SECRET,
+        { expiresIn: "7d" } // Long-lived token
+      );
+      
+      res.cookie("jwt", token, {
         httpOnly: true,
-        secure: true, // Ensure secure flag is set for HTTPS
-        sameSite: "none", // Ensure sameSite is set correctly for cross-site requests
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        maxAge: 3600000, // 1 hour
+      });
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        maxAge: 7 * 24 * 3600000, // 7 days
       });
       res.status(200).send({ user });
     } else {
@@ -137,6 +164,7 @@ export const Google = async (req, res, next) => {
 export const signout = (req, res, next) => {
   try {
     res.clearCookie("jwt");
+    res.clearCookie("refreshToken");
     res.status(200).send("User has been signed out");
   } catch (error) {
     res.status(500).send(error.message);

@@ -5,11 +5,13 @@ import {
   deleteUser,
   deleteUserbyAdmin,
   getAllUsers,
+  RefreshToken,
   updateUser,
 } from "../controllers/userController.js";
 
 const router = express.Router();
 
+router.post("/refreshToken", RefreshToken)
 router.put("/update/:userId", JWTverifier, updateUser);
 router.delete("/delete/:userId", JWTverifier, deleteUser);
 router.delete("/Admin/deleteuser/:userId", JWTverifier, deleteUserbyAdmin);

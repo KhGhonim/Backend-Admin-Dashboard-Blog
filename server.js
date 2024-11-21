@@ -8,7 +8,6 @@ import postRoutes from "./Api/Routes/postRoutes.js";
 import dashboardRoutes from "./Api/Routes/dashboardRoutes.js";
 import searchRoutes from "./Api/Routes/searchRoutes.js";
 import dotenv from "dotenv";
-
 dotenv.config();
 const app = express();
 const port = 3000;
